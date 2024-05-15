@@ -7,7 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App';
 import NoMatch from './pages/NoMatch';
 import Home from './pages/Home';
-import TestPage from './pages/TestPage'
+import TestPage from './pages/TestPage';
+import LoggedIn from './pages/LoggedIn';
 
 const router = createBrowserRouter([
   {
@@ -21,8 +22,10 @@ const router = createBrowserRouter([
       }, {
         path: '/TestPage',
         element: <TestPage />,
-      },
-
+      },{
+        path: '/LoggedIn',
+        element: <LoggedIn />
+      }
     ]
   }
 ]);
