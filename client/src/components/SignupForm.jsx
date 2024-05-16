@@ -7,25 +7,29 @@ import Auth from '../utils/auth';
 
 export default function Signup() {
     const [formState, setFormState ] = useState({
-        email: '',
-        password: '',
+        signupEmail: '',
+        signupPassword: '',
+        confirmPassword: '',
     });
 
     const [addUser, {error}] = useMutation(ADD_USER);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        
         try {
-            const mutationResponse = await addUser({
-                variables: {
-                    email: formState.email,
-                    password: formState.password
-                }
-            });
-            const token = mutationResponse.data.addUser.token;
-            Auth.login(token);
-            // window.location.assign('/loggedIn')
-
+            if(formState.confirmPassword === formState.signupPassword){
+                const mutationResponse = await addUser({
+                    variables: {
+                        email: formState.signupEmail,
+                        password: formState.signupPassword
+                    }
+                });
+                const token = mutationResponse.data.addUser.token;
+                Auth.login(token);
+            } else{
+                alert('passwords did not match')
+            }
         } catch (error) {
             console.error(error);
         }
@@ -39,10 +43,11 @@ export default function Signup() {
         });
     }
 
-
     return (
         <>
+
         <form onSubmit={handleFormSubmit}>
+            SignUp
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail" className="form-label">email</label>
                     <input 
@@ -50,7 +55,7 @@ export default function Signup() {
                         className="form-control" 
                         id="emailField" 
                         aria-describedby="emailHelp" 
-                        name='email'
+                        name='signupEmail'
                         onChange={handleChange}
                     />
                 </div>
@@ -63,8 +68,20 @@ export default function Signup() {
                     <input 
                         type="password" 
                         className="form-control"
-                        name='password'
-                        id="exampleInputPassword1"
+                        name='signupPassword'
+                        id="exampleInputPassword"
+                        onChange={handleChange} 
+                    />
+                     <label 
+                        htmlFor="exampleInputPassword" 
+                        className="form-label">
+                            Confirm Password
+                    </label>
+                    <input 
+                        type="password" 
+                        className="form-control"
+                        name='confirmPassword'
+                        id="exampleInputconfirmPassword"
                         onChange={handleChange} 
                     />
                 </div>
@@ -74,7 +91,8 @@ export default function Signup() {
                     className="btn btn-primary">
                         Submit
                 </button>
-            </form>
+        </form>
+
 
         </>
     )
