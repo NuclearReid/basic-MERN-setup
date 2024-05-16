@@ -9,7 +9,7 @@ const typeDefs = gql`
 
     type Auth {
         token: String
-        user: user
+        User: User
     }
 
     type Query{

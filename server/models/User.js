@@ -6,13 +6,19 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true,
+        // set up the regex/validator for this to be an email
     },
     password: {
         type: String,
         required: true
         // set up requirments for the password later on
     },
-    // Can add more stuff here
+    // foo: [
+    //     {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'Foo',
+    //     }
+    // ]
 });
 
 userSchema.pre('save', async function (next) {

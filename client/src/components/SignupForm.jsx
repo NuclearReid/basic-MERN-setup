@@ -24,7 +24,7 @@ export default function Signup() {
             });
             const token = mutationResponse.data.addUser.token;
             Auth.login(token);
-            window.location.assign('/loggedIn')
+            // window.location.assign('/loggedIn')
 
         } catch (error) {
             console.error(error);
@@ -44,7 +44,7 @@ export default function Signup() {
         <>
         <form onSubmit={handleFormSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputUsername" className="form-label">email</label>
+                    <label htmlFor="exampleInputEmail" className="form-label">email</label>
                     <input 
                         type="email" 
                         className="form-control" 
@@ -68,6 +68,7 @@ export default function Signup() {
                         onChange={handleChange} 
                     />
                 </div>
+
                 <button 
                     type="submit" 
                     className="btn btn-primary">

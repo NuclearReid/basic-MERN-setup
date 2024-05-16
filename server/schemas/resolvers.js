@@ -23,12 +23,12 @@ const resolvers = {
 
     },
     Mutation: {
-        addUser: async (parent, {username, password }) => {
+        addUser: async (parent, {email, password }) => {
             // const foo = await Foo.create({
             //     boo: '',
             // });
             const user = await User.create({
-                username,
+                email,
                 password,
                 // foo: foo._id,
             });
